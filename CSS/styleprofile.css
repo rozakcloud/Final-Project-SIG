@@ -1,0 +1,114 @@
+@import url('http://fonts.googleapis.com/css/family=Quicksand:400,500&subset=latin-ext');
+body {
+    background: linear-gradient(to left, #8ecdff, #ffffff);
+    /* background:#ffffff; */
+    /* background: url("../foto/Spanduks-1.jpg"); */
+    /* no-repeat center center fixed */
+    /* background-size: 100% ;
+    background-position: center;
+    background-repeat: no-repeat; */
+    /* background-size: cover; */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    font-family: sans-serif;
+}
+.foto-atas img{
+    width: 100px;
+}
+/* .main{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    overflow: hidden;
+    background: linear-gradient(to right, #9c27b0, #8ecdff);
+} */
+.main h1 {
+    display: inline-block;
+	padding:15px 24px;
+    text-transform: uppercase;
+}
+nav{
+    width: 80%;
+    position: sticky;
+    margin: 20px auto;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+}
+.nav-links{
+    flex: 1;
+    text-align: right;
+}
+.nav-links ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+}
+.nav-links ul li a{
+    color: #fff;
+    text-decoration: none;
+}
+ul{
+    margin-left: -45px;
+}
+li {
+    list-style: none;
+    display: inline-block;
+}
+h1 {
+    text-align: center;
+    font-size: 30px;
+    margin: 0;
+    font-weight: bold;
+    color: #000000;
+}
+.text{
+    text-align: center;
+    font-size: 15px;
+    margin: 0;
+}
+p {
+    font-size: 1.4rem;
+	margin-top: 5px;
+	line-height: 2.5rem;
+	font-weight: 300;
+	letter-spacing: .05rem;
+    margin: 0 auto;
+    height: auto;
+}
+#profile .profile {
+	flex-direction: column-reverse;
+	text-align: center;
+	max-width: 1200px;
+	margin: 0 auto;
+    align-items: center;
+}
+#profile .col-left {
+	width: 250px;
+	height: 360px;
+}
+#profile .col-right {
+	width: 100%;
+}
+#profile .col-right h2 {
+	font-size: 1.8rem;
+	font-weight: 500;
+	letter-spacing: .2rem;
+	margin-bottom: 10px;
+}
+#profile .col-right p {
+	margin-bottom: 20px;
+}
+#profile .col-right .cta {
+	color: black;
+	margin-bottom: 50px;
+	padding: 10px 20px;
+	font-size: 2rem;
+}
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}

@@ -1,0 +1,3003 @@
+<!-- filter checkbox -->
+<!DOCTYPE html>
+  <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Final Project SIG</title>
+        <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+        <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.js"></script>
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.0.1/mapbox-gl.css" rel="stylesheet" />
+        <link rel="stylesheet" href="../CSS/stylemap.css">
+
+        <style>
+
+            body { margin: 0; padding: 0; }
+            #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        </style>
+        <div id="map"></div>
+        
+    </head>
+    <body>
+    <style>
+        .mapboxgl-popup {
+                max-width: 1000px;
+                font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        }
+
+        .filter-group {
+            font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            font-weight: 600;
+            position: absolute;
+            top: 68px;
+            left: 5px;
+            z-index: 1;
+            border-radius: 3px;
+            width: 120px;
+            color: #fff;
+        }
+
+        .filter-group input[type='checkbox']:first-child + label {
+            border-radius: 3px 3px 0 0;
+        }
+
+        .filter-group label:last-child {
+            border-radius: 0 0 3px 3px;
+            border: none;
+        }
+
+        .filter-group input[type='checkbox'] {
+            display: none;
+        }
+
+        .filter-group input[type='checkbox'] + label {
+            background-color: #61b7fd;
+            display: block;
+            cursor: pointer;
+            padding: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+        }
+
+        .filter-group input[type='checkbox'] + label {
+            background-color: #61b7fd;
+            text-transform: capitalize;
+        }
+
+        .filter-group input[type='checkbox'] + label:hover,
+        .filter-group input[type='checkbox']:checked + label {
+            background-color: #8ecdff;
+        }
+
+        .filter-group input[type='checkbox']:checked + label:before {
+            content: '✔';
+            margin-right: 5px;
+        }
+    </style>
+    <div id="mapid"  class="ml-5"></div>
+    <nav id="filter-group" class="filter-group"></nav>
+
+    <script type="text/javascript">
+        mapboxgl.accessToken = 'pk.eyJ1Ijoicm96YWtjbG91ZCIsImEiOiJja3dodGFhb2QwaW8yMnBvd3o2czRia3djIn0.roUU5E0pIJ3lDLReDXbo5w';
+        
+        var layerIDs = []; // Will contain a list used to filter against.
+        
+        var filterGroup = document.getElementById('filter-group');
+
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [106.84445053791474, -6.208281859516461],
+            zoom: 11
+        });
+
+        var places = {
+            'type': 'FeatureCollection',
+            'features': [
+                {   'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-01 Halte Busway Terminal Blok M</strong><p>Jl. Sultan Hasanuddin</p><p>Rute: Blok M - Kota</p>',
+                        'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.80113829316284, -6.243462538356504]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-02 Halte Busway Masjid Agung</strong><p>Jl. Sisingamangaraja</p><p>Rute: Blok M - Kota</p>',
+                        'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.79839756012979, -6.235047670755919]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-03 Halte Busway Bundaran Senayan</strong><p>Jl. Jend Sudirman</p><p>Rute: Blok M - Kota</p>',
+                        'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8012944430633, -6.2275321692585415]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-04 Halte Busway Gelora Bung Karno</strong><p>Jl. Jend Sudirman</p><p>Rute: Blok M - Kota</p>',
+                        'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.80529610874176, -6.224488132534979]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-05 Halte Busway Polda Metro Jaya</strong><p>Jl. Jend Sudirman</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.80945914074678, -6.2216168367508695]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-06 Halte Busway Bendungan Hilir</strong><p>Jl. Jend Sudirman</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.81539717463346, -6.21695756229283]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-07 Halte Busway Karet (Baru)</strong><p>Jl. Jend Sudirman</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.81816364097999, -6.2147211212751206]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-08 Halte Busway Setiabudi (Baru)</strong><p>Jl. Jend Sudirman</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82110053049763, -6.21016648332423]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-09 Halte Busway Dukuh Atas 1</strong><p>Jl. Jend Sudirman</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.822189725793, -6.205546295714824]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-10 Halte Busway Tosari (Baru)</strong><p>Jl. Mohammad Husni Thamrin</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82308184735112, -6.198516732975473]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-11 Halte Busway Bundaran HI</strong><p>Jl. Mohammad Husni Thamrin</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82285933350097, -6.193515061553952]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-12 Halte Busway Sarinah</strong><p>Jl. Mohammad Husni Thamrin</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82283214313044, -6.187843936018418]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-13 Halte Busway Bank Indonesia</strong><p>Jl. Mohammad Husni Thamrin</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82279685473586, -6.182570704057349]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-14 Halte Busway Monas / Monumen Nasional</strong><p>Jl. Museum</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82273838921381, -6.175501501470926]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-15 Halte Busway Harmoni Central Busway (HCB)</strong><p>Jl. Gajah Mada</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82031632944715, -6.165991333347522]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-16 Halte Busway Sawah Besar</strong><p>Jl. Gajah Mada</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.81901076816494, -6.160163218071659]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-17 Halte Busway Mangga Besar</strong><p>Jl. Gajah Mada</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.81719438954424, -6.152180163406078]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-18 Halte Busway Olimo</strong><p>Jl. Gajah Mada</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.81661222659353, -6.149594504174578]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-19 Halte Busway Glodok</strong><p>Jl. Gajah Mada</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.81533506659956, -6.1444930798953985]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K01-20 Halte Busway Stasiun Kota</strong><p>Jl. Stasiun Kota</p><p>Rute: Blok M - Kota</p>',
+                            'icon': 'Koridor 1'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.81410761736791, -6.137692288368446]
+                    }
+                },
+                {   'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-01 Halte Busway Pulo Gadung</strong><p>Jl. Bekasi Raya</p><p>Rute: Pulogadung - Harmoni</p>',
+                        'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.90822572722038, -6.183213799976223]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-02 Halte Busway Bermis</strong><p>Jl. Perintis Kemerdekaan</p><p>Rute: Pulogadung - Harmoni</p>',
+                        'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89826452193613, -6.178253274052606]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-03 Halte Busway Pulomas</strong><p>Jl. Perintis Kemerdekaan</p><p>Rute: Pulogadung - Harmoni</p>',
+                        'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89277071079391, -6.174861828462227]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-04 Halte Busway Asmi</strong><p>Jl. Perintis Kemerdekaan</p><p>Rute: Pulogadung - Harmoni</p>',
+                        'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88873711709114, -6.171859147270605]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-05 Halte Busway Pedongkelan</strong><p>Jl. Perintis Kemerdekaan</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88161927227321, -6.167525394424067]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-06 Halte Busway Cempaka Timur</strong><p>Jl. Letjend Suprapto</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87700000000012, -6.166414000018744]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-07 Halte Busway RS Islam</strong><p>Jl. Letjend Suprapto</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87061332944889, -6.168602333344005]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-08 Halte Busway Cempaka Tengah</strong><p>Jl. Letjend Suprapto</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86638333655333, -6.170557734813814]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-09 Halte Busway Pasar Cempaka Putih</strong><p>Jl. Letjend Suprapto</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86275343147666, -6.172252950721301]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-10 Halte Busway Rawa Selatan</strong><p>Jl. Letjend Suprapto</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8578810158549, -6.174016045702]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-11 Halte Busway Galur</strong><p>Jl. Letjend Suprapto</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.85457637207219, -6.174509490256923]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-12 Halte Busway Senen</strong><p>Jl. Kramat Bunder</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8429433294475, -6.178055333316219]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-13 Halte Busway Atrium Senen</strong><p>Jl. Senen Raya</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.84068850274566, -6.177119707942471]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-14 Halte Busway RSPAD</strong><p>Jl. Dr Abdul Rachman Saleh</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83670560203318, -6.1754354502688615]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-15 Halte Busway Deplu</strong><p>Jl. Dr Abdul Rachman Saleh</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83460154326596, -6.173140877595693]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-16 Halte Busway Gambir 1</strong><p>Jl. Medan Merdeka Timur</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83043169991366, -6.1742586532153005]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-17 Halte Busway Istiqlal</strong><p>Jl. Medan Merdeka Timur</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83040688597588, -6.172634666236252]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-18 Halte Busway Juanda</strong><p>Jl. Veteran</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83075032944753, -6.168173333341112]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-19 Halte Busway Pecenongan</strong><p>Jl. Ir H Juanda</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82777842923574, -6.167858968394172]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-20 Halte Busway Harmoni Central Busway (HCB)</strong><p>Jl. Gajah Mada</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82031431779014, -6.165998000076716]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-21 Halte Busway Balaikota</strong><p>Jl. Medan Merdeka Selatan</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82660831779087, -6.180379333241009]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-22 Halte Busway Gambir 2</strong><p>Jl. Medan Merdeka Selatan</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83144908500262, -6.179203057661829]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-23 Halte Busway Kwitang</strong><p>Jl. Prapatan</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83799398621082, -6.181154386086011]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K02-24 Halte Busway Senen</strong><p>Jl. Kramat Bunder</p><p>Rute: Pulogadung - Harmoni</p>',
+                            'icon': 'Koridor 2'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8429440000018, -6.1780553333101755]
+                    }
+                },
+                {   'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-01 Halte Busway Kalideres</strong><p>Jl. Daan Mogot</p><p>Rute: Kalideres - Pasar Baru</p>',
+                        'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.7060675317436, -6.1549403145779165]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-02 Halte Busway Pesakih</strong><p>Jl. Daan Mogot</p><p>Rute: Kalideres - Pasar Baru</p>',
+                        'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.71507262666064, -6.154850837174781]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-03 Halte Busway Sumur Bor</strong><p>Jl. Daan Mogot</p><p>Rute: Kalideres - Pasar Baru</p>',
+                        'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.71839531809572, -6.153167007935105]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-04 Halte Busway Rawa Buaya</strong><p>Jl. Daan Mogot</p><p>Rute: Kalideres - Pasar Baru</p>',
+                        'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.7257311164641, -6.153730471678005]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-05 Halte Busway Jembatan Baru</strong><p>Jl. Daan Mogot</p><p>Rute: Kalideres - Pasar Baru</p>',
+                            'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.73041769549121, -6.15472685706371]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-06 Halte Busway Dispenda / Dipenda</strong><p>Jl. Daan Mogot</p><p>Rute: Kalideres - Pasar Baru</p>',
+                            'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.7367129999997, -6.154490333375633]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-07 Halte Busway Jembatan Gantung</strong><p>Jl. Daan Mogot</p><p>Rute: Kalideres - Pasar Baru</p>',
+                            'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.74561799999965, -6.155043666748053]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-08 Halte Busway Taman Kota</strong><p>Jl. Daan Mogot</p><p>Rute: Kalideres - Pasar Baru</p>',
+                            'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.75752971384186, -6.156947032599159]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-09 Halte Busway Indosiar</strong><p>Jl. Daan Mogot</p><p>Rute: Kalideres - Pasar Baru</p>',
+                            'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.7749684674776,-6.163194631808072]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-10 Halte Busway Jelambar</strong><p>Jl. Daan Mogot</p><p>Rute: Kalideres - Pasar Baru</p>',
+                            'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.78658956790638,-6.16643441100627]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-11 Halte Busway Grogol Trisakti</strong><p>Jl. Kyai Tapa</p><p>Rute: Kalideres - Pasar Baru</p>',
+                            'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.7898113294478,-6.166706333344422]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-12 Halte Busway RS Sumber Waras</strong><p>Jl. Kyai Tapa</p><p>Rute: Kalideres - Pasar Baru</p>',
+                            'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.79768065889563, -6.166167333347366]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-13 Halte Busway Harmoni Central Busway (HCB)</strong><p>Jl. Gajah Mada</p><p>Rute: Kalideres - Pasar Baru</p>',
+                            'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82031634940886, -6.165991333346123]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-14 Halte Busway Pecenongan</strong><p>Jl. Ir H Juanda</p><p>Rute: Kalideres - Pasar Baru</p>',
+                            'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82784032944758, -6.167464000013812]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-15 Halte Busway Juanda</strong><p>Jl. Ir H Juanda</p><p>Rute: Kalideres - Pasar Baru</p>',
+                            'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83063432944759, -6.1679863333416955]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K03-16 Halte Busway Pasar Baru</strong><p>Jl. Pos</p><p>Rute: Kalideres - Pasar Baru</p>',
+                            'icon': 'Koridor 3'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83466832944754, -6.166147000019063]
+                    }
+                },
+                {   'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-01 Halte Busway Pulogadung</strong><p>Jl. Bekasi Raya</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                        'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.90822473640974, -6.183218581763639]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-02 Halte Busway Pasar Pulogadung</strong><p>Jl. Bekasi Raya</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                        'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.90601042589377, -6.1874953212377175]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-03 Halte Busway TU Gas</strong><p>Jl. Pemuda Raya</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                        'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.90471300000014, -6.1925353332800785]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-04 Halte Busway Layur</strong><p>Jl. Pemuda Raya</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                        'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89856432944768, -6.193570333277428]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-05 Halte Busway Pemuda Rawamangun</strong><p>Jl. Pemuda Raya</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89137032944765, -6.1935229999147055]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-06 Halte Busway Velodrome</strong><p>Jl. Pemuda Raya</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88833962478206, -6.193532165672072]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-07 Halte Busway Sunan Giri</strong><p>Jl. Pemuda Raya</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88337232944691, -6.193255999916539]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-08 Halte Busway UNJ</strong><p>Jl. Pemuda Raya</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87998741291705, -6.1929300086398165]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-09 Halte Busway Pramuka LIA</strong><p>Jl. Pramuka</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86835232944762, -6.192311333280376]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-10 Halte Busway Utan Kayu</strong><p>Jl. Pramuka</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86401732944783, -6.192934666639346]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-11 Halte Busway Pasar Genjing</strong><p>Jl. Pramuka</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8606433294478, -6.194694666636941]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-12 Halte Busway Matraman 2</strong><p>Jl. Pramuka</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.85399921809748, -6.199352299618204]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-13 Halte Busway Manggarai</strong><p>Jl. Sultan Agung</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.84714156289043, -6.208843195117693]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-14 Halte Busway Pasar Rumput</strong><p>Jl. Sultan Agung</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8412453294474, -6.207211333242436]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-15 Halte Busway Halimun</strong><p>Jl. Sultan Agung</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83230333739256, -6.20499856588345]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K04-16 Halte Busway Dukuh Atas 2</strong><p>Jl. Setiabudi Tengah</p><p>Rute: Pulogadung - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 4'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8236936030133, -6.204406441425241]
+                    }
+                },
+                {   'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-01 Halte Busway Ancol</strong><p>Jl. Lodan Raya</p><p>Rute: Ancol - Kampung Melayu</p>',
+                        'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83105654909345, -6.129753695039978]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-02 Halte Busway Pademangan</strong><p>Jl. Gunung Sahari</p><p>Rute: Ancol - Kampung Melayu</p>',
+                        'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83161116516622, -6.1337774695057075]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-03 Halte Busway Gunung Sahari</strong><p>Jl. Gunung Sahari</p><p>Rute: Ancol - Kampung Melayu</p>',
+                        'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83222830953821, -6.136492074324992]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-04 Halte Busway Jembatan Merah</strong><p>Jl. Gunung Sahari</p><p>Rute: Ancol - Kampung Melayu</p>',
+                        'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83421232944772, -6.146892333394482]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-05 Halte Busway Pasar Baru Timur</strong><p>Jl. Gunung Sahari</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83811232944622, -6.162493333356947]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-06 Halte Busway Budi Utomo</strong><p>Jl. Gunung Sahari</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83897140580542, -6.1659175641852215]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-07 Halte Busway Senen Sentral</strong><p>Jl. Pasar Senen</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8417443294478, -6.177037999977637]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-08 Halte Busway Pal Putih</strong><p>Jl. Kramat Raya</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.84373404802022, -6.184423569521119]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-09 Halte Busway Kramat Sentiong</strong><p>Jl. Kramat Raya</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.84593904131512, -6.188252224075999]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-10 Halte Busway Salemba</strong><p>Jl. Salemba Raya</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.84890655318058, -6.193627728369172]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-11 Halte Busway Salemba Corolous</strong><p>Jl. Salemba Raya</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.85113781641341, -6.196999637062317]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-12 Halte Busway Matraman 1</strong><p>Jl. Matraman Raya</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.85399921809748, -6.199352299618204]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-13 Halte Busway Tegalan</strong><p>Jl. Matraman Raya</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.85688840188972, -6.202667935494291]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-14 Halte Busway Slamet Riyadi</strong><p>Jl. Matraman Raya</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.85908286914247, -6.208209805077916]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-15 Halte Busway Kebon Pala</strong><p>Jl. Matraman Raya</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86089536621624, -6.212507041163882]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-16 Halte Busway Pasar Jatinegara</strong><p>Jl. Jatinegara Timur</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86614124471565, -6.215600694145475]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K05-17 Halte Busway Terminal Kampung Melayu</strong><p>Jl. Kampung Melayu Besar</p><p>Rute: Ancol - Kampung Melayu</p>',
+                            'icon': 'Koridor 5'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86693516555091, -6.2244693241821905]
+                    }
+                },
+                {   'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-01 Halte Busway Ragunan</strong><p>Jl. Harsono Rm</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                        'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82004032944818, -6.30565933299139]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-02 Halte Busway Departemen Pertanian</strong><p>Jl. Harsono Rm</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                        'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82208332944546, -6.294798333021866]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-03 Halte Busway SMK 57</strong><p>Jl. Warung Jati Barat</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                        'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82358565889554, -6.291220333029767]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-04 Halte Busway Jati Padang</strong><p>Jl. Warung Jati Barat</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                        'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82635432944792, -6.2853183330427145]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-05 Halte Busway Pejaten</strong><p>Jl. Warung Jati Barat</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82969032944762, -6.278599333061069]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-06 Halte Busway Buncit Indah</strong><p>Jl. Warung Jati Barat</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83036632944628, -6.273864333073109]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-07 Halte Busway Warung Jati</strong><p>Jl. Mampang Prapatan</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82959964753813, -6.262165932446464]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-08 Halte Busway Imigrasi</strong><p>Jl. Mampang Prapatan</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82788156936496, -6.256006628546586]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-09 Halte Busway Duren Tiga</strong><p>Jl. Mampang Prapatan</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82698199999984, -6.252140333127959]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-10 Halte Busway Mampang Prapatan</strong><p>Jl. Mampang Prapatan</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82578041944787, -6.241853020976399]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-11 Halte Busway Kuningan Timah</strong><p>Jl. HR Rasuna Said</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82785672269, -6.236035750021538]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-12 Halte Busway Patra Kuningan</strong><p>Jl. HR Rasuna Said</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83144104627495, -6.233422600217767]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-13 Halte Busway Departemen Kesehatan</strong><p>Jl. HR Rasuna Said</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83325828237264, -6.228559750718264]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-14 Halte Busway GOR Sumantri</strong><p>Jl. HR Rasuna Said</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83207300000026, -6.220736333208271]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-15 Halte Busway Karet Kuningan</strong><p>Jl. HR Rasuna Said</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83097232944735, -6.2173819998248145]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-16 Halte Busway Kuningan Madya</strong><p>Jl. HR Rasuna Said</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83037732944706, -6.212742333227997]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-17 Halte Busway Setiabudi Aini</strong><p>Jl. HR Rasuna Said</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82983053190806, -6.208145586411578]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-18 Halte Busway Latuharhari</strong><p>Jl. Purworejo</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82724932944774, -6.2022683332552955]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-19 Halte Busway Halimun</strong><p>Jl. Sultan Agung</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83230399999977, -6.2049983332485334]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K06-20 Halte Busway Dukuh Atas 2</strong><p>Jl. Setiabudi Tengah</p><p>Rute: Ragunan - Dukuh Atas 2</p>',
+                            'icon': 'Koridor 6'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82369328601312, -6.204407113184928]
+                    }
+                },
+                {   'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-01 Halte Busway Terminal Kampung Rambutan</strong><p>Jl. Lingkar Luar Selatan</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                        'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88009953033718, -6.306971426595468]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-02 Halte Busway Tanah Merdeka</strong><p>Jl. Lingkar Luar Selatan</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                        'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87314773080409, -6.30842170158766]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-03 Halte Busway Fly Over Raya Bogor</strong><p>Jl. Tol Lingkar Luar Jakarta</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                        'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86545465889472,-6.306587999483194]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-04 Halte Busway RS Harapan Bunda</strong><p>Jl. Bogor Raya</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                        'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86742464399607, -6.302711864722384]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-05 Halte Busway Pasar Induk Keramat Jati</strong><p>Jl. Bogor Raya</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                            'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87199499999984, -6.294238333020262]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-06 Halte Busway PGC Cililitan</strong><p>Jl. Mayjend Sutoyo</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                            'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86616888259756, -6.262570836801203]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-07 Halte Busway Sutoyo BKN</strong><p>Jl. Mayjend Sutoyo</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                            'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86951627889448, -6.258149750276096]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-08 Halte Busway Cawang UKI</strong><p>Jl. Mayjend Sutoyo</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                            'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87330302853495, -6.250695336826967]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-09 Halte Busway Cawang BNN</strong><p>Jl. Letjend MT Haryono</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                            'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87216055702422, -6.2462208625332325]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-10 Halte Busway Cawang Otista</strong><p>Jl. Otto Iskandardinata</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                            'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86876554046692, -6.243383818487592]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-11 Halte Busway Gelanggang Remaja</strong><p>Jl. Otto Iskandardinata</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                            'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86775132944727, -6.235139999758952]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-12 Halte Busway Bidara Cina</strong><p>Jl. Otto Iskandardinata</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                            'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86713953190934, -6.229444154622725]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K07-13 Halte Busway Terminal Kampung Melayu</strong><p>Jl. Kampung Melayu Besar</p><p>Rute: Kampung Rambutan - Kampung Melayu</p>',
+                            'icon': 'Koridor 7'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86693465889536, -6.224469333199025]
+                    }
+                },
+                {   'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-01 Halte Busway Terminal Lebak Bulus</strong><p>Jl. Pasar Jumat</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                        'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.77471086992624, -6.289333203917459]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-02 Halte Busway Pondok Pinang</strong><p>Jl. Ciputat Raya</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                        'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.77195344444229, -6.282582120599366]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-03 Halte Busway Pondok Indah 1</strong><p>Jl. Metro Pondok Indah</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                        'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.77946375407443, -6.2872537165958455]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-04 Halte Busway Pondok Indah 2</strong><p>Jl. Metro Pondok Indah</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                        'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.7835458692323, -6.267544927930264]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-05 Halte Busway Tanah Kusir Kodim</strong><p>Jl. Sultan Iskandar Muda</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.78167932944748, -6.257141666557061]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-06 Halte Busway Kebayoran Lama Bungur</strong><p>Jl. Sultan Iskandar Muda</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.7816144211449, -6.252886009201604]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-07 Halte Busway Pasar Kebayoran Lama</strong><p>Jl. Teuku Nyak Arif</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.7836693294478, -6.237091333166861]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-08 Halte Busway Simprug</strong><p>Jl. Teuku Nyak Arif</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.7863840484862, -6.233935089811798]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-09 Halte Busway Permata Hijau</strong><p>Jl. Letjend Soepono</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.78309543629693, -6.221407593811148]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-10 Halte Busway Permata Hijau RS Medika</strong><p>Jl. Panjang Raya</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.777639298985, -6.218337191082506]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-11 Halte Busway Pos Pengumben</strong><p>Jl. Panjang Raya</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.77238832944784, -6.213354666613004]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-12 Halte Busway Kelapa Dua Sasak</strong><p>Jl. Panjang Raya</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.76948533430756, -6.205638255447266]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-13 Halte Busway Kebon Jeruk</strong><p>Jl. Raya Perjuangan</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.76881540598161, -6.193619000181132]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-14 Halte Busway Duri Kepa</strong><p>Jl. Raya Perjuangan</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.76843452223486, -6.185489793310548]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-15 Halte Busway Kedoya Raya</strong><p>Jl. Panjang</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.76581199999951, -6.174572666663087]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-16 Halte Busway Kedoya Green Garden</strong><p>Jl. Panjang</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.76295704255799, -6.1639972850619476]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-17 Halte Busway Grogol 2</strong><p>Jl. Letjend S Parman</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.78850235789365, -6.167902167360008]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-18 Halte Busway S Parman Central Park</strong><p>Jl. Letjend S Parman</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.79082465889296, -6.173702666664316]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-19 Halte Busway Tomang Mandala</strong><p>Jl. Tomang Raya</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8000203294477, -6.177058999977313]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-20 Halte Busway RS Tarakan</strong><p>Jl. Kyai Caringin</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.80978349890646, -6.171170463150368]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-21 Halte Busway Petojo</strong><p>Jl. Suryo Pranoto</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.81667131421712, -6.169965333339127]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K08-22 Halte Busway Harmoni Central Busway</strong><p>Jl. Gajah Mada</p><p>Rute: Lebak Bulus - Harmoni</p>',
+                            'icon': 'Koridor 8'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82031632944746, -6.165991333346174]
+                    }
+                },
+                {   'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-01 Halte Busway Terminal Pinang Ranti</strong><p>Jl. Pondok Gede Raya</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                        'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88608624223755, -6.290970342634893]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-02 Halte Busway Garuda Taman Mini</strong><p>Jl. Pondok Gede Raya</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                        'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88076526732267, -6.289983326109104]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-03 Masuk Tol Jagorawi</strong><p>Jl. Tol Jagorawi</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                        'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88294605674562, -6.301830986188266]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-04 Keluar Tol Jagorawi</strong><p>Jl. Tol Jagorawi</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                        'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8723585474666, -6.2703421273681705]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-05 Halte Busway Pusat Grosir Cililitan</strong><p>Jl. Mayjend Sutoyo</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86616855749057, -6.262570478373656]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-06 Halte Busway Cawang UKI</strong><p>Jl. Mayjend Sutoyo</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87330332944774, -6.2506959996975775]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-07 Halte Busway Cawang BNN</strong><p>Jl. Letjend MT Haryono</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87216067621905, -6.246221859023902]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-08 Halte Busway Cawang Ciliwung</strong><p>Jl. Letjend MT Haryono</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86277870435633, -6.242904388294407]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-09 Halte Busway Cikoko Stasiun Cawang</strong><p>Jl. Letjend MT Haryono</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.85777899999974, -6.242962999727418]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-10 Halte Busway Tebet</strong><p>Jl. Letjend MT Haryono</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.85161449506558, -6.2429949107278135]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-11 Halte Busway Pancoran</strong><p>Jl. Letjend MT Haryono</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8441047477366, -6.243080235058877]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-12 Halte Busway Pancoran Barat</strong><p>Jl. Jend Gatot Subroto</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83763032944748, -6.241379333155585]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-13 Halte Busway Tegal Parang</strong><p>Jl. Jend Gatot Subroto</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8307364669244, -6.238782356260481]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-14 Halte Busway Gatot Subroto Jamsostek</strong><p>Jl. Jend Gatot Subroto</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82194865889531, -6.23291633317679]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-15 Halte Busway Gatot Subroto LIPI</strong><p>Jl. Jend Gatot Subroto</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8176473294479, -6.22684299978907]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-16 Halte Busway Semanggi</strong><p>Jl. Jend Gatot Subroto</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.81394699999917, -6.221365999809066]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-17 Halte Busway JCC Senayan</strong><p>Jl. Jend Gatot Subroto</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.80805013450194, -6.212966701969034]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-18 Halte Busway Slipi Petamburan</strong><p>Jl. Jend Gatot Subroto</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.79992382581825, -6.201713648123218]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-19 Halte Busway Slipi Kemanggisan</strong><p>Jl. Letjend S Parman</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.79726889893838, -6.190167333286339]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-20 Halte Busway S Parman Harapan Kita</strong><p>Jl. Letjend S Parman</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.79706432944761, -6.184844333299158]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-21 Halte Busway S Parman Podomoro City</strong><p>Jl. Letjend S Parman</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.79082535702828, -6.17370285300743]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-22 Halte Busway Grogol 2</strong><p>Jl. Letjend S Parman</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.788502329448, -6.167901333341627]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-23 Halte Busway Latumenten Stasiun KA</strong><p>Jl. Doktor Makaliwe</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.7906160318761, -6.161934059088904]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-24 Halte Busway Jembatan Besi</strong><p>Jl. Latumenten</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.794848305721, -6.151714739796468]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-25 Halte Busway Jembatan Dua</strong><p>Jl. Jembatan Dua</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.79313232253597, -6.137733974664855]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-26 Halte Busway Jembatan Tiga</strong><p>Jl. Jembatan Tiga</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.79281571861345, -6.133634169048738]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-27 Halte Busway Penjaringan</strong><p>Jl. Jembatan Tiga</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.79214541552467, -6.126379653845144]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K09-28 Halte Busway Pluit</strong><p>Jl. Pluit Permai</p><p>Rute: Terminal Pinang Ranti - Pluit Village</p>',
+                            'icon': 'Koridor 9'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.78920532944831, -6.1157483334753255]
+                    }
+                },
+                {   'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-01 Halte Busway Cililitan 2 (PGC 2)</strong><p>Jl. Mayjend Sutoyo</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                        'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8663403294477, -6.262607333101434]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-02 Halte Busway Sutoyo BKN</strong><p>Jl. Mayjend Sutoyo</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                        'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86951643974494, -6.258149381215764]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-03 Halte Busway Cawang UKI</strong><p>Jl. Mayjend Sutoyo</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                        'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87330328425199, -6.250695113128353]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-04 Halte Busway Cawang Sutoyo</strong><p>Jl. Mayjend DI Pandjaitan</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                        'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87589456834367, -6.2445209234391585]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-05 Halte Busway Panjaitan Penas</strong><p>Jl. Cipinang Cimpedak 4</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87794951297202, -6.239155451448859]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-06 Halte Busway Kebon Nanas Cipinang</strong><p>Jl. Mayjend DI Pandjaitan</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87604432944704, -6.230692999774256]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-07 Halte Busway Prumpung Pedati</strong><p>Jl. Mayjend DI Pandjaitan</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87440328817418, -6.221157292601937]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-08 Halte Busway Bea Cukai Ahmad Yani</strong><p>Jl. Jend Ahmad Yani</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87370100000054, -6.206406999867434]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-09 Halte Busway Utan Kayu Rawamangun</strong><p>Jl. Jend Ahmad Yani</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87379632944794, -6.198044333265793]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-10 Halte Busway Pramuka BPKP 2</strong><p>Jl. Jend Ahmad Yani</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87461261686298, -6.193714398240077]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-11 Halte Busway Kayu Putih Rawasari</strong><p>Jl. Jend Ahmad Yani</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8753313294477, -6.186999333293608]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-12 Halte Busway Pulomas Pacuan Kuda</strong><p>Jl. Jend Ahmad Yani</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87644132944781, -6.1736553333262885]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-13 Halte Busway Cempaka Putih</strong><p>Jl. Jend Ahmad Yani</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.876861, -6.172161651522931]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-14 Halte Busway Cempaka Timur 2</strong><p>Jl. Yos Sudarso</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8784905000442, -6.166647497551314]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-15 Halte Busway Yos Sudarso Kodamar</strong><p>Jl. Yos Sudarso</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88139232944829, -6.162307000034196]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-16 Halte Busway Sunter Kelapa Gading</strong><p>Jl. Yos Sudarso</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89035651568082, -6.143745322793819]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-17 Halte Busway Plumpang Pertamina</strong><p>Jl. Yos Sudarso</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89331854402886, -6.130395409464214]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-18 Halte Busway Walikota Jakut</strong><p>Jl. Yos Sudarso</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89307632944787, -6.119350000194728]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-19 Halte Busway Permai Koja</strong><p>Jl. Yos Sudarso</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89294724001262, -6.113435349406828]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-20 Halte Busway Enggano</strong><p>Jl. Enggano</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.890996, -6.110138000228681]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K10-21 Halte Busway Tanjung Priok</strong><p>Jl. Stasiun Tanjung Priok</p><p>Rute: Cililitan - Tanjung Priok</p>',
+                            'icon': 'Koridor 10'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88140344099487, -6.109460671261171]
+                    }
+                },
+                {   'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-01 Halte Busway Pulo Gebang</strong><p>Terminal Pulo Gebang</p><p>Rute: Kampung Melayu – Pulogebang</p>',
+                        'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.95096741859733, -6.211369668679411]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-02 Halte Busway Walikota Jakarta Timur</strong><p>Jalan Doktor Sumarno</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                        'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.94534866107453, -6.212509019469732]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-03 Halte Busway Penggilingan</strong><p>Jalan Penggilingan</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                        'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.93959850815999, -6.213927792205628]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-04 Halte Busway Perumnas Klender</strong><p>Jalan I Gusti Ngurah Rai</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                        'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.93056449714469, -6.216702788604508]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-05 Halte Busway Flyover Radin Inten</strong><p>Jalan I Gusti Ngurah Rai</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                            'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.92439232944781, -6.215997333220143]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-06 Halte Busway Buaran</strong><p>Jalan I Gusti Ngurah Rai</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                            'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.91764232944784, -6.2151059998334865]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-07 Halte Busway Kampung Sumur</strong><p>Jalan I Gusti Ngurah Rai</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                            'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.91183500000167, -6.214426999828116]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-08 Halte Busway Flyover Klender</strong><p>Jalan I Gusti Ngurah Rai</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                            'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.90303259805953, -6.2136112777619354]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-09 Halte Busway Stasiun Klender</strong><p>Jalan I Gusti Ngurah Rai</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                            'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89816132944802, -6.213507333225793]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-10 Halte Busway Cipinang</strong><p>Jalan I Gusti Ngurah Rai</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                            'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88985932944821, -6.213645333226568]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-11 Halte Busway Imigrasi Jakarta Timur</strong><p>Jalan Bekasi Timur Raya</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                            'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88234642741372, -6.214615173613681]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-12 Halte Busway Pasar Enjo</strong><p>Jalan Bekasi Timur Raya</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                            'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8782653294475, -6.21487999983459]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-13 Halte Busway Flyover Jatinegara</strong><p>Jalan Bekasi Barat Raya</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                            'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87414732944785, -6.215143666611833]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-14 Halte Busway Stasiun Jatinegara 2</strong><p>K11-14 Halte Busway Stasiun Jatinegara 2</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                            'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86800757274138, -6.215580228510474]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-15 Halte Busway Jatinegara RS Premier</strong><p>Jalan Jatinegara Timur</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                            'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86800632944771, -6.221813999808128]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K11-16 Halte Busway Kampung Melayu</strong><p>Terminal Kampung Melayu</p><p>Rute: Walikota Jakarta Timur – Kampung Melayu</p>',
+                            'icon': 'Koridor 11'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.86658933653335, -6.224902522744506]
+                    }
+                },
+                {   'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-01 Halte Busway Pluit (transit)</strong><p>Jalan Pluit Selatan Raya</p><p>Rute: Pluit - Tanjung Priok</p>',
+                        'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.79106625564533, -6.1157794236430165]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-02 Halte Busway Landmark Pluit Auto Plaza</strong><p>Jalan Pluit Selatan Raya</p><p>Rute: Pluit - Tanjung Priok</p>',
+                        'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.7996453145232, -6.125243808059529]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-03 Halte Busway Pakin</strong><p>Jalan Gedong Panjang</p><p>Rute: Pluit - Tanjung Priok</p>',
+                        'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.80472719891378, -6.127950284766561]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-04 Halte Busway Gedong Panjang</strong><p>Jalan Gedong Panjang</p><p>Rute: Pluit - Tanjung Priok</p>',
+                        'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8059462202572, -6.132611350739898]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-05 Halte Busway Museum Fatahillah</strong><p>Jalan Kunir</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.81207621948894, -6.133901652281086]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-06 Halte Busway Kota</strong><p>Jalan Pintu Besar Utara & Jl Stasiun Kota</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.81396107295572, -6.137753975760026]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-07 Halte Busway Pangeran Jayakarta</strong><p>Jalan Mangga Dua Raya</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8178345420159, -6.1375954386202904]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-08 Halte Busway ITC Mangga Dua</strong><p>Jalan Mangga Dua Raya</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.82595759775063, -6.136154072907532]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-09 Halte Busway Gunung Sahari Mangga Dua (transit)</strong><p>Jalan Gunung Sahari</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8324690759465, -6.137200792795158]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-10 Halte Busway Jembatan Merah (transit)</strong><p>Jalan Gunung Sahari</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.83428955663626, -6.146783929306987]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-11 Halte Busway Landas Pacu Timur</strong><p>Jalan Landas Pacu Timur, Kemayoran</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.85373053166475, -6.152218178875811]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-12 Halte Busway Danau Sunter Barat</strong><p>Jalan Danau Sunter Barat, Tanjung Priok</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.85707232944729, -6.141339000112352]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-13 Halte Busway Sunter SMP 140</strong><p>Jalan Danau Sunter Utara</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.85818832944767, -6.139945841539413]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-14 Halte Busway Sunter Karya</strong><p>Jalan Danau Sunter Utara</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.87035232944706, -6.137817333418762]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-15 Halte Busway Sunter Boulevard</strong><p>Jl. Yos Sudarso</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88870532944784, -6.15026545460017]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-16 Halte Busway Sunter Kelapa Gading (transit)</strong><p>Jalan Laksamana Yos Sudarso</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.8907170271049, -6.142725305086958]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-17 Halte Busway Plumpang Pertamina</strong><p>Jl. Yos Sudarso</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89388732944794, -6.128656333439612]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-18 Halte Busway Kantor Walikota Jakarta Utara (transit)</strong><p>Jl. Yos Sudarso</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89343132944765, -6.118835000196533]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-19 Halte Busway Permai Koja</strong><p>Jl. Yos Sudarso</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89311199999948, -6.113886333477251]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-20 Halte Busway Enggano (transit)</strong><p>Jl. Enggano</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.89243732944774, -6.110096000229826]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'description':
+                            '<strong>K12-21 Halte Busway Tanjung Priok (transit)</strong><p>Jl. Stasiun Tanjung Priok</p><p>Rute: Pluit - Tanjung Priok</p>',
+                            'icon': 'Koridor 12'
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [106.88173730912615, -6.109551691400205]
+                    }
+                },
+            ]
+        };
+
+        map.on('load', function () {
+            map.loadImage(
+                'https://docs.mapbox.com/mapbox-gl-js/assets/custom_marker.png',
+                // Add an image to use as a custom marker
+                function (error, image) {
+                    if (error) throw error;
+                    map.addImage('custom-marker', image);
+
+                    map.addSource('places', {
+                        'type': 'geojson',
+                        'data': places
+                    });
+
+                    places.features.forEach(function (feature) {
+                        var symbol = feature.properties['icon'];
+                        var layerID = 'poi-' + symbol;
+                        console.log
+
+                        // Add a layer for this symbol type if it hasn't been added already.
+                        if (!map.getLayer(layerID)) {
+                            map.addLayer({
+                                'id': layerID,
+                                'type': 'symbol',
+                                'source': 'places',
+                                'layout': {
+                                    'icon-image': 'custom-marker',
+                                    'icon-allow-overlap': true,
+                                },
+                                'filter': ['==', 'icon', symbol]
+                            });
+
+                            // Add checkbox and label elements for the layer.
+                            var input = document.createElement('input');
+                            input.type = 'checkbox';
+                            input.id = layerID;
+                            input.checked = true;
+                            filterGroup.appendChild(input);
+
+                            var label = document.createElement('label');
+                            label.setAttribute('for', layerID);
+                            label.textContent = symbol;
+                            filterGroup.appendChild(label);
+
+                            // When the checkbox changes, update the visibility of the layer.
+                            input.addEventListener('change', function (e) {
+                                map.setLayoutProperty(
+                                    layerID,
+                                    'visibility',
+                                    e.target.checked ? 'visible' : 'none'
+                                );
+                            });
+
+                            // Create a popup, but don't add it to the map yet.
+                            var popup = new mapboxgl.Popup({
+                                closeButton: false,
+                                closeOnClick: false
+                            });
+
+                            map.on('mouseenter', layerID, function (e) {
+                                // Change the cursor style as a UI indicator.
+                                map.getCanvas().style.cursor = 'pointer';
+
+                                var coordinates = e.features[0].geometry.coordinates.slice();
+                                var description = e.features[0].properties.description;
+
+                                // Ensure that if the map is zoomed out such that multiple
+                                // copies of the feature are visible, the popup appears
+                                // over the copy being pointed to.
+                                while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                                    coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+                                }
+
+                                // Populate the popup and set its coordinates
+                                // based on the feature found.
+                                popup.setLngLat(coordinates).setHTML(description).addTo(map);
+                            });
+
+                            map.on('mouseleave', layerID, function () {
+                                map.getCanvas().style.cursor = '';
+                                popup.remove();
+                            });
+
+                            layerIDs.push(layerID);
+                        }
+                    });
+                }
+            );
+        });
+
+        map.addControl(
+                new mapboxgl.NavigationControl(),
+                'bottom-left'
+        );
+
+    </script>
+        <div class="utama">
+        <nav>
+            <div class="profile">
+                <h1><a href="../index.html">Halte Trans Jakarta</a></h1>
+            </div>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="profile.html">Tentang Trans Jakarta</a></li>
+                    <li><a href="../index.html">Home</a></li>
+                </ul>
+            </div>
+        </nav>
+        </div>
+    </body>
+  </html>

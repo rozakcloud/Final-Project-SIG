@@ -1,0 +1,257 @@
+koridor 1, Rute: Blok M - Kota (20)
+[106.80113829316284, -6.243462538356504] K01-01 Halte Busway Terminal Blok M | Jl. Sultan Hasanuddin
+[106.79839756012979, -6.235047670755919] K01-02 Halte Busway Masjid Agung | Jl. Sisingamangaraja
+[106.8012944430633, -6.2275321692585415] K01-03 Halte Busway Bundaran Senayan | Jl. Jend Sudirman
+[106.80529610874176, -6.224488132534979] K01-04 Halte Busway Gelora Bung Karno | Jl. Jend Sudirman
+[106.80945914074678, -6.2216168367508695] K01-05 Halte Busway Polda Metro Jaya | Jl. Jend Sudirman
+[106.81539717463346, -6.21695756229283] K01-06 Halte Busway Bendungan Hilir | Jl. Jend Sudirman
+[106.81816364097999, -6.2147211212751206] K01-07 Halte Busway Karet (Baru) | Jl. Jend Sudirman
+[106.82110053049763, -6.21016648332423] K01-08 Halte Busway Setiabudi | Jl. Jend Sudirman
+[106.822189725793, -6.205546295714824] K01-09 Halte Busway Dukuh Atas 1 | Jl. Jend Sudirman
+[106.82308184735112, -6.198516732975473] K01-10 Halte Busway Tosari | Jl. Mohammad Husni Thamrin
+[106.82285933350097, -6.193515061553952] K01-11 Halte Busway Bundaran HI | Jl. Mohammad Husni Thamrin
+[106.82283214313044, -6.187843936018418] K01-12 Halte Busway Sarinah | Jl. Mohammad Husni Thamrin
+[106.82279685473586, -6.182570704057349] K01-13 Halte Busway Bank Indonesia | Jl. Mohammad Husni Thamrin
+[106.82273838921381, -6.175501501470926] K01-14 Halte Busway Monas / Monumen Nasional | Jl. Museum
+[106.82031632944715, -6.165991333347522] K01-15 Halte Busway Harmoni Central Busway (HCB) | Jl. Gajah Mada
+[106.81901076816494, -6.160163218071659] K01-16 Halte Busway Sawah Besar | Jl. Gajah Mada
+[106.81719438954424, -6.152180163406078] K01-17 Halte Busway Mangga Besar | Jl. Gajah Mada
+[106.81661222659353, -6.149594504174578] K01-18 Halte Busway Olimo | Jl. Gajah Mada
+[106.81533506659956, -6.1444930798953985] K01-19 Halte Busway Glodok | Jl. Gajah Mada
+[106.81410761736791, -6.137692288368446] K01-20 Halte Busway Stasiun Kota | Jl. Stasiun Kota
+
+koridor 2, Rute: Pulogadung - Harmoni (24)
+[106.90822572722038, -6.183213799976223] K02-01 Halte Busway Pulo Gadung | Jl. Bekasi Raya
+[106.89826452193613, -6.178253274052606] K02-02 Halte Busway Bermis | Jl. Perintis Kemerdekaan
+[106.89277071079391, -6.174861828462227] K02-03 Halte Busway Pulomas | Jl. Perintis Kemerdekaan
+[106.88873711709114, -6.171859147270605] K02-04 Halte Busway Asmi | Jl. Perintis Kemerdekaan
+[106.88161927227321, -6.167525394424067] K02-05 Halte Busway Pedongkelan | Jl. Perintis Kemerdekaan
+[106.87700000000012, -6.166414000018744] K02-06 Halte Busway Cempaka Timur | Jl. Letjend Suprapto
+[106.87061332944889, -6.168602333344005] K02-07 Halte Busway RS Islam | Jl. Letjend Suprapto
+[106.86638333655333, -6.170557734813814] K02-08 Halte Busway Cempaka Tengah | Jl. Letjend Suprapto
+[106.86275343147666, -6.172252950721301] K02-09 Halte Busway Pasar Cempaka Putih | Jl. Letjend Suprapto
+[106.8578810158549, -6.174016045702] K02-10 Halte Busway Rawa Selatan | Jl. Letjend Suprapto
+[106.85457637207219, -6.174509490256923] K02-11 Halte Busway Galur | Jl. Letjend Suprapto
+[106.8429433294475, -6.178055333316219] K02-12 Halte Busway Senen | Jl. Kramat Bunder
+[106.84068850274566, -6.177119707942471] K02-13 Halte Busway Atrium Senen | Jl. Senen Raya
+[106.83670560203318, -6.1754354502688615] K02-14 Halte Busway RSPAD | Jl. Dr Abdul Rachman Saleh
+[106.83460154326596, -6.173140877595693] K02-15 Halte Busway Deplu | Jl. Dr Abdul Rachman Saleh
+[106.83043169991366, -6.1742586532153005] K02-16 Halte Busway Gambir 1 | Jl. Medan Merdeka Timur
+[106.83040688597588, -6.172634666236252] K02-17 Halte Busway Istiqlal | Jl. Medan Merdeka Timur
+[106.83075032944753, -6.168173333341112] K02-18 Halte Busway Juanda | Jl. Veteran
+[106.82777842923574, -6.167858968394172] K02-19 Halte Busway Pecenongan | Jl. Ir H Juanda
+[106.82031431779014, -6.165998000076716] K02-20 Halte Busway Harmoni Central Busway (HCB) | Jl. Gajah Mada
+[106.82660831779087, -6.180379333241009] K02-21 Halte Busway Balaikota | Jl. Medan Merdeka Selatan
+[106.83144908500262, -6.179203057661829] K02-22 Halte Busway Gambir 2 | Jl. Medan Merdeka Selatan
+[106.83799398621082, -6.181154386086011] K02-23 Halte Busway Kwitang | Jl. Prapatan
+[106.8429440000018, -6.1780553333101755] K02-24 Halte Busway Senen | Jl. Kramat Bunder
+
+koridor 3, Rute: Kalideres - Pasar Baru (16)
+[106.7060675317436, -6.1549403145779165] K03-01 Halte Busway Kalideres | Jl. Daan Mogot
+[106.71507262666064, -6.154850837174781] K03-02 Halte Busway Pesakih | Jl. Daan Mogot
+[106.71839531809572, -6.153167007935105] K03-03 Halte Busway Sumur Bor | Jl. Daan Mogot
+[106.7257311164641, -6.153730471678005] K03-04 Halte Busway Rawa Buaya | Jl. Daan Mogot
+[106.73041769549121, -6.15472685706371] K03-05 Halte Busway Jembatan Baru | Jl. Daan Mogot
+[106.7367129999997, -6.154490333375633] K03-06 Halte Busway Dispenda / Dipenda | Jl. Daan Mogot
+[106.74561799999965, -6.155043666748053] K03-07 Halte Busway Jembatan Gantung | Jl. Daan Mogot
+[106.75752971384186, -6.156947032599159] K03-08 Halte Busway Taman Kota | Jl. Daan Mogot
+[106.7749684674776,-6.163194631808072] K03-09 Halte Busway Indosiar | Jl. Daan Mogot
+[106.78658956790638,-6.16643441100627] K03-10 Halte Busway Jelambar | Jl. Daan Mogot
+[106.7898113294478,-6.166706333344422] K03-11 Halte Busway Grogol Trisakti | Jl. Kyai Tapa
+[106.79768065889563, -6.166167333347366] K03-12 Halte Busway RS Sumber Waras | Jl. Kyai Tapa
+[106.82031634940886, -6.165991333346123] K03-13 Halte Busway Harmoni Central Busway (HCB) | Jl. Gajah Mada
+[106.82784032944758, -6.167464000013812] K03-14 Halte Busway Pecenongan | Jl. Ir H Juanda
+[106.83063432944759, -6.1679863333416955] K03-15 Halte Busway Juanda | Jl. Ir H Juanda
+[106.83466832944754, -6.166147000019063] K03-16 Halte Busway Pasar Baru | Jl. Pos
+
+koridor 4, Rute: Pulogadung - Dukuh Atas 2 (16)
+[106.90822473640974, -6.183218581763639] K04-01 Halte Busway Pulogadung | Jl. Bekasi Raya
+[106.90601042589377, -6.1874953212377175] K04-02 Halte Busway Pasar Pulogadung | Jl. Bekasi Raya
+[106.90471300000014, -6.1925353332800785] K04-03 Halte Busway TU Gas | Jl. Pemuda Raya
+[106.89856432944768, -6.193570333277428] K04-04 Halte Busway Layur | Jl. Pemuda Raya
+[106.89137032944765, -6.1935229999147055] K04-05 Halte Busway Pemuda Rawamangun | Jl. Pemuda Raya
+[106.88833962478206, -6.193532165672072] K04-06 Halte Busway Velodrome | Jl. Pemuda Raya
+[106.88337232944691, -6.193255999916539] K04-07 Halte Busway Sunan Giri | Jl. Pemuda Raya
+[106.87998741291705, -6.1929300086398165] K04-08 Halte Busway UNJ | Jl. Pemuda Raya
+[106.86835232944762, -6.192311333280376] K04-09 Halte Busway Pramuka LIA | Jl. Pramuka
+[106.86401732944783, -6.192934666639346] K04-10 Halte Busway Utan Kayu | Jl. Pramuka
+[106.8606433294478, -6.194694666636941] K04-11 Halte Busway Pasar Genjing | Jl. Pramuka
+[106.85399921809748, -6.199352299618204] K04-12 Halte Busway Matraman 2 | Jl. Pramuka
+[106.84714156289043, -6.208843195117693] K04-13 Halte Busway Manggarai | Jl. Sultan Agung
+[106.8412453294474, -6.207211333242436] K04-14 Halte Busway Pasar Rumput | Jl. Sultan Agung
+[106.83230333739256, -6.20499856588345] K04-15 Halte Busway Halimun | Jl. Sultan Agung
+[106.8236936030133, -6.204406441425241] K04-16 Halte Busway Dukuh Atas 2 | Jl. Setiabudi Tengah
+
+koridor 5, Rute: Ancol - Kampung Melayu (17)
+[106.83105654909345, -6.129753695039978] K05-01 Halte Busway Ancol | Jl. Lodan Raya
+[106.83161116516622, -6.1337774695057075] K05-02 Halte Busway Pademangan | Jl. Gunung Sahari
+[106.83222830953821, -6.136492074324992] K05-03 Halte Busway Gunung Sahari | Jl. Gunung Sahari
+[106.83421232944772, -6.146892333394482] K05-04 Halte Busway Jembatan Merah | Jl. Gunung Sahari
+[106.83811232944622, -6.162493333356947] K05-05 Halte Busway Pasar Baru Timur | Jl. Gunung Sahari
+[106.83897140580542, -6.1659175641852215] K05-06 Halte Busway Budi Utomo | Jl. Gunung Sahari
+[106.8417443294478, -6.177037999977637] K05-07 Halte Busway Senen Sentral | Jl. Pasar Senen
+[106.84373404802022, -6.184423569521119] K05-08 Halte Busway Pal Putih | Jl. Kramat Raya
+[106.84593904131512, -6.188252224075999] K05-09 Halte Busway Kramat Sentiong | Jl. Kramat Raya
+[106.84890655318058, -6.193627728369172] K05-10 Halte Busway Salemba | Jl. Salemba Raya
+[106.85113781641341, -6.196999637062317] K05-11 Halte Busway Salemba Corolous | Jl. Salemba Raya
+[106.85422279322995, -6.199910949761638] K05-12 Halte Busway Matraman 1 | Jl. Matraman Raya
+[106.85688840188972, -6.202667935494291] K05-13 Halte Busway Tegalan | Jl. Matraman Raya
+[106.85908286914247, -6.208209805077916] K05-14 Halte Busway Slamet Riyadi | Jl. Matraman Raya
+[106.86089536621624, -6.212507041163882] K05-15 Halte Busway Kebon Pala | Jl. Matraman Raya
+[106.86614124471565, -6.215600694145475] K05-16 Halte Busway Pasar Jatinegara | Jl. Jatinegara Timur
+[106.86693516555091, -6.2244693241821905] K05-17 Halte Busway Terminal Kampung Melayu | Jl. Kampung Melayu Besar
+
+koridor 6, Rute: Ragunan - Dukuh Atas 2 (20)
+[106.82004032944818, -6.30565933299139] K06-01 Halte Busway Ragunan | Jl. Harsono Rm
+[106.82208332944546, -6.294798333021866] K06-02 Halte Busway Departemen Pertanian | Jl. Harsono Rm
+[106.82358565889554, -6.291220333029767] K06-03 Halte Busway SMK 57 | Jl. Warung Jati Barat
+[106.82635432944792, -6.2853183330427145] K06-04 Halte Busway Jati Padang | Jl. Warung Jati Barat
+[106.82969032944762, -6.278599333061069] K06-05 Halte Busway Pejaten | Jl. Warung Jati Barat
+[106.83036632944628, -6.273864333073109] K06-06 Halte Busway Buncit Indah | Jl. Warung Jati Barat
+[106.82959964753813, -6.262165932446464] K06-07 Halte Busway Warung Jati | Jl. Mampang Prapatan
+[106.82788156936496, -6.256006628546586] K06-08 Halte Busway Imigrasi | Jl. Mampang Prapatan
+[106.82698199999984, -6.252140333127959] K06-09 Halte Busway Duren Tiga | Jl. Mampang Prapatan
+[106.82578041944787, -6.241853020976399] K06-10 Halte Busway Mampang Prapatan | Jl. Mampang Prapatan
+[106.82785672269, -6.236035750021538] K06-11 Halte Busway Kuningan Timah | Jl. HR Rasuna Said
+[106.83144104627495, -6.233422600217767] K06-12 Halte Busway Patra Kuningan | Jl. HR Rasuna Said
+[106.83325828237264, -6.228559750718264] K06-13 Halte Busway Departemen Kesehatan | Jl. HR Rasuna Said
+[106.83207300000026, -6.220736333208271] K06-14 Halte Busway GOR Sumantri | Jl. HR Rasuna Said
+[106.83097232944735, -6.2173819998248145] K06-15 Halte Busway Karet Kuningan | Jl. HR Rasuna Said
+[106.83037732944706, -6.212742333227997] K06-16 Halte Busway Kuningan Madya | Jl. HR Rasuna Said
+[106.82983053190806, -6.208145586411578] K06-17 Halte Busway Setiabudi Aini | Jl. HR Rasuna Said
+[106.82724932944774, -6.2022683332552955] K06-18 Halte Busway Latuharhari | Jl. Purworejo
+[106.83230399999977, -6.2049983332485334] K06-19 Halte Busway Halimun | Jl. Sultan Agung
+[106.82369328601312, -6.204407113184928] K06-20 Halte Busway Dukuh Atas 2 | Jl. Setiabudi Tengah
+
+koridor 7, Rute: Kampung Rambutan - Kampung Melayu (13)
+[106.88009953033718, -6.306971426595468] K07-01 Halte Busway Terminal Kampung Rambutan | Jl. Lingkar Luar Selatan
+[106.87314773080409, -6.30842170158766] K07-02 Halte Busway Tanah Merdeka | Jl. Lingkar Luar Selatan
+[106.86545465889472,-6.306587999483194] K07-03 Halte Busway Fly Over Raya Bogor | Jl. Tol Lingkar Luar Jakarta
+[106.86742464399607, -6.302711864722384] K07-04 Halte Busway RS Harapan Bunda | Jl. Bogor Raya
+[106.87199499999984, -6.294238333020262] K07-05 Halte Busway Pasar Induk Keramat Jati | Jl. Bogor Raya
+[106.86616888259756, -6.262570836801203] K07-06 Halte Busway PGC Cililitan | Jl. Mayjend Sutoyo
+[106.86951627889448, -6.258149750276096] K07-07 Halte Busway Sutoyo BKN | Jl. Mayjend Sutoyo
+[106.87330302853495, -6.250695336826967] K07-08 Halte Busway Cawang UKI | Jl. Mayjend Sutoyo
+[106.87216055702422, -6.2462208625332325] K07-09 Halte Busway Cawang BNN | Jl. Letjend MT Haryono
+[106.86876554046692, -6.243383818487592] K07-10 Halte Busway Cawang Otista | Jl. Otto Iskandardinata
+[106.86775132944727, -6.235139999758952] K07-11 Halte Busway Gelanggang Remaja | Jl. Otto Iskandardinata
+[106.86713953190934, -6.229444154622725] K07-12 Halte Busway Bidara Cina | Jl. Otto Iskandardinata
+[106.86693465889536, -6.224469333199025] K07-13 Halte Busway Terminal Kampung Melayu | Jl. Kampung Melayu Besar
+
+koridor 8, Rute: Lebak Bulus - Harmoni (22)
+[106.77471086992624, -6.289333203917459] K08-01 Halte Busway Terminal Lebak Bulus | Jl. Pasar Jumat
+[106.77195344444229, -6.282582120599366] K08-02 Halte Busway Pondok Pinang | Jl. Ciputat Raya
+[106.77946375407443, -6.2872537165958455] K08-03 Halte Busway Pondok Indah 1 | Jl. Metro Pondok Indah
+[106.7835458692323, -6.267544927930264] K08-04 Halte Busway Pondok Indah 2 | Jl. Metro Pondok Indah
+[106.78167932944748, -6.257141666557061] K08-05 Halte Busway Tanah Kusir Kodim | Jl. Sultan Iskandar Muda
+[106.7816144211449, -6.252886009201604] K08-06 Halte Busway Kebayoran Lama Bungur | Jl. Sultan Iskandar Muda
+[106.7836693294478, -6.237091333166861] K08-07 Halte Busway Pasar Kebayoran Lama | Jl. Teuku Nyak Arif
+[106.7863840484862, -6.233935089811798] K08-08 Halte Busway Simprug | Jl. Teuku Nyak Arif
+[106.78309543629693, -6.221407593811148] K08-09 Halte Busway Permata Hijau | Jl. Letjend Soepono
+[106.777639298985, -6.218337191082506] K08-10 Halte Busway Permata Hijau RS Medika | Jl. Panjang Raya
+[106.77238832944784, -6.213354666613004] K08-11 Halte Busway Pos Pengumben | Jl. Panjang Raya
+[106.76948533430756, -6.205638255447266] K08-12 Halte Busway Kelapa Dua Sasak | Jl. Panjang Raya
+[106.76881540598161, -6.193619000181132] K08-13 Halte Busway Kebon Jeruk | Jl. Raya Perjuangan
+[106.76843452223486, -6.185489793310548] K08-14 Halte Busway Duri Kepa | Jl. Raya Perjuangan
+[106.76581199999951, -6.174572666663087] K08-15 Halte Busway Kedoya Raya | Jl. Panjang
+[106.76295704255799, -6.1639972850619476] K08-16 Halte Busway Kedoya Green Garden | Jl. Panjang
+[106.78850235789365, -6.167902167360008] K08-17 Halte Busway Grogol 2 | Jl. Letjend S Parman
+[106.79082465889296, -6.173702666664316] K08-18 Halte Busway S Parman Central Park | Jl. Letjend S Parman
+[106.8000203294477, -6.177058999977313] K08-19 Halte Busway Tomang Mandala | Jl. Tomang Raya
+[106.80978349890646, -6.171170463150368] K08-20 Halte Busway RS Tarakan | Jl. Kyai Caringin
+[106.81667131421712, -6.169965333339127] K08-21 Halte Busway Petojo | Jl. Suryo Pranoto
+[106.82031632944746, -6.165991333346174] K08-22 Halte Busway Harmoni Central Busway | Jl. Gajah Mada
+
+koridor 9, Rute: Terminal Pinang Ranti - Pluit Village (28)
+[106.88608624223755, -6.290970342634893] K09-01 Halte Busway Terminal Pinang Ranti | Jl. Pondok Gede Raya
+[106.88076526732267, -6.289983326109104] K09-02 Halte Busway Garuda Taman Mini | Jl. Pondok Gede Raya
+[106.88294605674562, -6.301830986188266] K09-03 Masuk Tol Jagorawi | Jl. Tol Jagorawi
+[106.8723585474666, -6.2703421273681705] K09-04 Keluar Tol Jagorawi | Jl. Tol Jagorawi
+[106.86616855749057, -6.262570478373656] K09-05 Halte Busway Pusat Grosir Cililitan | Jl. Mayjend Sutoyo
+[106.87330332944774, -6.2506959996975775] K09-06 Halte Busway Cawang UKI | Jl. Mayjend Sutoyo
+[106.87216067621905, -6.246221859023902] K09-07 Halte Busway Cawang BNN | Jl. Letjend MT Haryono
+[106.86277870435633, -6.242904388294407] K09-08 Halte Busway Cawang Ciliwung | Jl. Letjend MT Haryono
+[106.85777899999974, -6.242962999727418] K09-09 Halte Busway Cikoko Stasiun Cawang | Jl. Letjend MT Haryono
+[106.85161449506558, -6.2429949107278135] K09-10 Halte Busway Tebet | Jl. Letjend MT Haryono
+[106.8441047477366, -6.243080235058877] K09-11 Halte Busway Pancoran | Jl. Letjend MT Haryono
+[106.83763032944748, -6.241379333155585] K09-12 Halte Busway Pancoran Barat | Jl. Jend Gatot Subroto
+[106.8307364669244, -6.238782356260481] K09-13 Halte Busway Tegal Parang | Jl. Jend Gatot Subroto
+[106.82194865889531, -6.23291633317679] K09-14 Halte Busway Gatot Subroto Jamsostek | Jl. Jend Gatot Subroto
+[106.8176473294479, -6.22684299978907] K09-15 Halte Busway Gatot Subroto LIPI | Jl. Jend Gatot Subroto
+[106.81394699999917, -6.221365999809066] K09-16 Halte Busway Semanggi | Jl. Jend Gatot Subroto
+[106.80805013450194, -6.212966701969034] K09-17 Halte Busway JCC Senayan | Jl. Jend Gatot Subroto
+[106.79992382581825, -6.201713648123218] K09-18 Halte Busway Slipi Petamburan | Jl. Jend Gatot Subroto
+[106.79726889893838, -6.190167333286339] K09-19 Halte Busway Slipi Kemanggisan | Jl. Letjend S Parman
+[106.79706432944761, -6.184844333299158] K09-20 Halte Busway S Parman Harapan Kita | Jl. Letjend S Parman
+[106.79082535702828, -6.17370285300743] K09-21 Halte Busway S Parman Podomoro City | Jl. Letjend S Parman
+[106.788502329448, -6.167901333341627] K09-22 Halte Busway Grogol 2 | Jl. Letjend S Parman
+[106.7906160318761, -6.161934059088904] K09-23 Halte Busway Latumenten Stasiun KA | Jl. Doktor Makaliwe
+[106.794848305721, -6.151714739796468] K09-24 Halte Busway Jembatan Besi | Jl. Latumenten
+[106.79313232253597, -6.137733974664855] K09-25 Halte Busway Jembatan Dua | Jl. Jembatan Dua
+[106.79281571861345, -6.133634169048738] K09-26 Halte Busway Jembatan Tiga | Jl. Jembatan Tiga
+[106.79214541552467, -6.126379653845144] K09-27 Halte Busway Penjaringan | Jl. Jembatan Tiga
+[106.78920532944831, -6.1157483334753255] K09-28 Halte Busway Pluit | Jl. Pluit Permai
+
+koridor 10, Rute: Cililitan - Tanjung Priok (21)
+[106.8663403294477, -6.262607333101434] K10-01 Halte Busway Cililitan 2 (PGC 2) | Jl. Mayjend Sutoyo
+[106.86951643974494, -6.258149381215764] K10-02 Halte Busway Sutoyo BKN | Jl. Mayjend Sutoyo
+[106.87330328425199, -6.250695113128353] K10-03 Halte Busway Cawang UKI | Jl. Mayjend Sutoyo
+[106.87589456834367, -6.2445209234391585] K10-04 Halte Busway Cawang Sutoyo | Jl. Mayjend DI Pandjaitan
+[106.87794951297202, -6.239155451448859] K10-05 Halte Busway Panjaitan Penas | Jl. Cipinang Cimpedak 4
+[106.87604432944704, -6.230692999774256] K10-06 Halte Busway Kebon Nanas Cipinang | Jl. Mayjend DI Pandjaitan
+[106.87440328817418, -6.221157292601937] K10-07 Halte Busway Prumpung Pedati | Jl. Mayjend DI Pandjaitan
+[106.87370100000054, -6.206406999867434] K10-08 Halte Busway Bea Cukai Ahmad Yani | Jl. Jend Ahmad Yani
+[106.87379632944794, -6.198044333265793] K10-09 Halte Busway Utan Kayu Rawamangun | Jl. Jend Ahmad Yani
+[106.87461261686298, -6.193714398240077] K10-10 Halte Busway Pramuka BPKP 2 | Jl. Jend Ahmad Yani
+[106.8753313294477, -6.186999333293608] K10-11 Halte Busway Kayu Putih Rawasari | Jl. Jend Ahmad Yani
+[106.87644132944781, -6.1736553333262885] K10-12 Halte Busway Pulomas Pacuan Kuda | Jl. Jend Ahmad Yani
+[106.876861, -6.172161651522931] K10-13 Halte Busway Cempaka Putih | Jl. Jend Ahmad Yani
+[106.8784905000442, -6.166647497551314] K10-14 Halte Busway Cempaka Timur 2 | Jl. Yos Sudarso
+[106.88139232944829, -6.162307000034196] K10-15 Halte Busway Yos Sudarso Kodamar | Jl. Yos Sudarso
+[106.89035651568082, -6.143745322793819] K10-16 Halte Busway Sunter Kelapa Gading | Jl. Yos Sudarso
+[106.89331854402886, -6.130395409464214] K10-17 Halte Busway Plumpang Pertamina | Jl. Yos Sudarso
+[106.89307632944787, -6.119350000194728] K10-18 Halte Busway Walikota Jakut | Jl. Yos Sudarso
+[106.89294724001262, -6.113435349406828] K10-19 Halte Busway Permai Koja | Jl. Yos Sudarso
+[106.890996, -6.110138000228681] K10-20 Halte Busway Enggano | Jl. Enggano
+[106.88140344099487, -6.109460671261171] K10-21 Halte Busway Tanjung Priok | Jl. Stasiun Tanjung Priok
+
+koridor 11, Rute: Kampung Melayu – Pulogebang[1], Rute: Walikota Jakarta Timur – Kampung Melayu[2-16] (16)
+[106.95096741859733, -6.211369668679411] K11-01 Halte Busway Pulo Gebang | Terminal Pulo Gebang, Jakarta Timur
+[106.94534866107453, -6.212509019469732] K11-02 Halte Busway Walikota Jakarta Timur | Jalan Doktor Sumarno, Jakarta Timur
+[106.93959850815999, -6.213927792205628] K11-03 Halte Busway Penggilingan | Jalan Penggilingan
+[106.93056449714469, -6.216702788604508] K11-04 Halte Busway Perumnas Klender | Jalan I Gusti Ngurah Rai 
+[106.92439232944781, -6.215997333220143] K11-05 Halte Busway Flyover Radin Inten | Jalan I Gusti Ngurah Rai
+[106.91764232944784, -6.2151059998334865] K11-06 Halte Busway Buaran | Jalan I Gusti Ngurah Rai
+[106.91183500000167, -6.214426999828116] K11-07 Halte Busway Kampung Sumur | Jalan I Gusti Ngurah Rai
+[106.90303259805953, -6.2136112777619354] K11-08 Halte Busway Flyover Klender | Jalan I Gusti Ngurah Rai
+[106.89816132944802, -6.213507333225793] K11-09 Halte Busway Stasiun Klender | Jalan I Gusti Ngurah Rai
+[106.88985932944821, -6.213645333226568] K11-10 Halte Busway Cipinang | Jalan I Gusti Ngurah Rai
+[106.88234642741372, -6.214615173613681] K11-11 Halte Busway Imigrasi Jakarta Timur | Jalan Bekasi Timur Raya
+[106.8782653294475, -6.21487999983459] K11-12 Halte Busway Pasar Enjo | Jalan Bekasi Timur Raya
+[106.87414732944785, -6.215143666611833] K11-13 Halte Busway Flyover Jatinegara | Jalan Bekasi Barat Raya
+[106.86800757274138, -6.215580228510474] K11-14 Halte Busway Stasiun Jatinegara 2 | K11-14 Halte Busway Stasiun Jatinegara 2 
+[106.86800632944771, -6.221813999808128] K11-15 Halte Busway Jatinegara RS Premier | Jalan Jatinegara Timur
+[106.86658933653335, -6.224902522744506] K11-16 Halte Busway Kampung Melayu | Terminal Kampung Melayu
+
+koridor 12, Rute: Pluit - Tanjung Priok (21)
+[106.79106625564533, -6.1157794236430165] K12-01 Halte Busway Pluit (transit) | Jalan Pluit Selatan Raya
+[106.7996453145232, -6.125243808059529] K12-02 Halte Busway Landmark Pluit Auto Plaza | Jalan Pluit Selatan Raya
+[106.80472719891378, -6.127950284766561] K12-03 Halte Busway Pakin | Jalan Gedong Panjang
+[106.8059462202572, -6.132611350739898] K12-04 Halte Busway Gedong Panjang | Jalan Gedong Panjang
+[106.81207621948894, -6.133901652281086] K12-05 Halte Busway Museum Fatahillah | Jalan Kunir
+[106.81396107295572, -6.137753975760026] K12-06 Halte Busway Kota | Jalan Pintu Besar Utara & Jl Stasiun Kota
+[106.8178345420159, -6.1375954386202904] K12-07 Halte Busway Pangeran Jayakarta | Jalan Mangga Dua Raya
+[106.82595759775063, -6.136154072907532] K12-08 Halte Busway ITC Mangga Dua | Jalan Mangga Dua Raya 
+[106.8324690759465, -6.137200792795158] K12-09 Halte Busway Gunung Sahari Mangga Dua (transit) | Jalan Gunung Sahari
+[106.83428955663626, -6.146783929306987] K12-10 Halte Busway Jembatan Merah (transit) | Jalan Gunung Sahari
+[106.85373053166475, -6.152218178875811] K12-11 Halte Busway Landas Pacu Timur | Jalan Landas Pacu Timur, Kemayoran
+[106.85707232944729, -6.141339000112352] K12-12 Halte Busway Danau Sunter Barat | Jalan Danau Sunter Barat, Tanjung Priok
+[106.85818832944767, -6.139945841539413] K12-13 Halte Busway Sunter SMP 140 | Jalan Danau Sunter Utara
+[106.87035232944706, -6.137817333418762] K12-14 Halte Busway Sunter Karya | Jalan Danau Sunter Utara
+[106.88870532944784, -6.15026545460017] K12-15 Halte Busway Sunter Boulevard | Jalan Yos Sudarso
+[106.8907170271049, -6.142725305086958] K12-16 Halte Busway Sunter Kelapa Gading (transit) | Jalan Laksamana Yos Sudarso
+[106.89388732944794, -6.128656333439612] K12-17 Halte Busway Plumpang Pertamina | Jalan Laksamana Yos Sudarso
+[106.89343132944765, -6.118835000196533] K12-18 Halte Busway Kantor Walikota Jakarta Utara (transit) | Jalan Laksamana Yos Sudarso
+[106.89311199999948, -6.113886333477251] K12-19 Halte Busway Permai Koja | Jalan Laksamana Yos Sudarso
+[106.89243732944774, -6.110096000229826] K12-20 Halte Busway Enggano (transit) | Jalan Enggano
+[106.88173730912615, -6.109551691400205] K12-21 Halte Busway Tanjung Priok (transit) | Terminal Tanjung Priok
